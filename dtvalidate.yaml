@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dtvalidate
+  namespace: dynatrace
+spec:
+  containers:
+  - name: dtvalidate
+    # Docker pod valedation image
+    image: dtserviciospe/dtvalidate
+    env:
+    - name: dt_tenant
+      value: "xxxxxxxx.live.dynatrace"  # Reemplazar con el valor del Tenant identificado
+    - name: dt_hostgroup
+      value: "aks-dyna-prod" # Reemplazar con el valor del host group identificado
+    - name: dt_token
+      valueFrom:
+        secretKeyRef:
+          name: aksdyna # Reemplazar con el valor del nombre del AKS identificado
+          key: apiToken
